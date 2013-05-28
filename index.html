@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0"/>
+
+<title>Vector OSM</title>
+
+<script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.js'></script>
+<link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.css' rel='stylesheet' />
+<!--[if lte IE 8]>
+<link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.ie.css' rel='stylesheet' >
+<![endif]-->
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="tilejson.js"></script>
+
+<style type="text/css">
+html, body { height: 100% }
+#map { min-height: 100%; }
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif; font-size: 12px;
+}
+
+path { stroke-linejoin; round; stroke-linecap: round; fill: none}
+path.river { stroke : #24b; }
+path.building { fill:#A7A7A7; }
+path.road { stroke: #535353; }
+path.water { stroke: #B1D1F5; fill: #B1D1F5; }
+path.landuse { stroke: #ADCCAF; fill: #86C489; opacity: 0.3 }
+path.building { stroke: #f00; fill: #f00; }
+img { -webkit-filter: grayscale(100%) brightness(40%) contrast(150%);}
+path.building { fill:#A7A7A7;stroke:#A7A7A7; }
+</style>
+
+</head><body>
+
+<div id="map"></div>
+
+
+<script type="text/javascript">
+
+// Construct map, center if no location provided
+var map = L.map('map', { minZoom: 10, maxZoom: 18 } );
+map.setView([37.7837,-122.4166],16);
+
+
+// Add a fake GeoJSON line to coerce Leaflet into creating the <svg> tag that d3_geoJson needs
+new L.geoJson({"type": "LineString","coordinates":[[0,0],[0,0]]}).addTo(map);
+
+// Land use areas from OpenStreetMap
+var landColors = {
+  "farm": 1,
+  "meadow": 1,
+  "scrub": 1,
+  "forest": 1,
+  "farmyard": 1,
+  "farmland": 1,
+  "wood": 1,
+  "park": 1,
+  "cemetery": 1,
+  "golf_course": 1,
+  "grass": 1,
+  "nature_reserve": 1,
+  "pitch": 1,
+  "common": 1,
+  "residential": "#ddd",
+  "industrial": "red",
+  "commercial": "#C4C078",
+  "retail": "#C4C078",
+  "parking": "#C4C078",
+  "quarry": "#C4C078",
+  "school": "#C4C078",
+  "hospital": "#C4C078",
+  "college": "#C4C078",
+  "university": "#C4C078",
+}
+
+// Highways from OpenStreetMap
+var roadSizes = {
+  "highway": "7px",
+  "major_road": "3px",
+  "minor_road": "1px",
+  "rail": "0px",
+  "path": "0.5px"
+};
+var roadColor = {
+  "highway": "#F78545",
+  "major_road": "#FFCD2F",
+  "minor_road": "#707070",
+  "rail": "orange",
+  "path": "white"
+};
+
+// new L.TileLayer.d3_geoJSON("http://tile.openstreetmap.us/vectiles-skeletron/{z}/{x}/{y}.json", {
+//   text:'hello',
+//   href: function(d) { return '#' + d.geometry.coordinates[0]}
+// }).addTo(map)
+
+// Water Areas from OpenStreetMap
+new L.TileLayer.d3_geoJSON("http://tile.openstreetmap.us/vectiles-water-areas/{z}/{x}/{y}.json", {
+  class: "water",
+  style: ""
+}).addTo(map);
+
+new L.TileLayer.d3_geoJSON("http://tile.openstreetmap.us/vectiles-land-usages/{z}/{x}/{y}.json", {
+  class: "landuse"
+}).addTo(map);
+
+new L.TileLayer.d3_geoJSON("http://tile.openstreetmap.us/vectiles-buildings/{z}/{x}/{y}.json", {
+  class: "building"
+}).addTo(map);
+
+new L.TileLayer.d3_geoJSON("http://tile.openstreetmap.us/vectiles-highroad/{z}/{x}/{y}.json", {
+  class: "road",
+  style: function(d) { return "stroke-width: " + roadSizes[d.properties.kind] +"; stroke: " + roadColor[d.properties.kind]},
+  text:'hello',
+  // id: function(d) { return d.geometry.coordinates[0]}
+}).addTo(map);
+
+
+</script>
+</body>
+</html>
