@@ -12,13 +12,14 @@
 <![endif]-->
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="tilejson.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="foursquare.js"></script>
 
 <style type="text/css">
 html, body { height: 100% }
 #map { min-height: 100%; }
 body {
     margin: 0;
-    font-family: Helvetica, Arial, sans-serif; font-size: 12px;
 }
 
 path { stroke-linejoin; round; stroke-linecap: round; fill: none}
@@ -28,8 +29,22 @@ path.road { stroke: #535353; }
 path.water { stroke: #B1D1F5; fill: #B1D1F5; }
 path.landuse { stroke: #ADCCAF; fill: #86C489; opacity: 0.3 }
 path.building { stroke: #f00; fill: #f00; }
-img { -webkit-filter: grayscale(100%) brightness(40%) contrast(150%);}
 path.building { fill:#A7A7A7;stroke:#A7A7A7; }
+.place {
+  width: 100px!important;
+}
+.placeA {
+  text-align: center;
+  font-size: 10.5px;
+  
+  color: #292929!important;
+  cursor:pointer;
+  text-decoration:none;
+}
+.place img {
+  background: rgba(185, 0, 0, 0.41);
+}
+
 </style>
 
 </head><body>
@@ -117,6 +132,8 @@ new L.TileLayer.d3_geoJSON("http://tile.openstreetmap.us/vectiles-highroad/{z}/{
   // id: function(d) { return d.geometry.coordinates[0]}
 }).addTo(map);
 
+map.on('moveend',runFoursquare)
+runFoursquare()
 
 </script>
 </body>
