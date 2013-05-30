@@ -1,10 +1,10 @@
 function runFoursquare (){ 
   fourSquareClientId = '3ODULPRCZOZL43JVOBNUBAUPXD5MXKBX24DOUZYNO0V3SEUL';
   fourSquareSecret = 'MBM0IB0YS1JZB2QLZ3WZDHSZAC10JOO0JY4VGDOF0IU3E5AH';
-  searchRadius = 1200;
+  searchRadius = 1400;
   var lat = map.getCenter().lat;
   var lng = map.getCenter().lng;
-  var limit = map.getZoom() * 2;
+  var limit = 15;
 
   $.ajax({
     type: "GET",
@@ -24,7 +24,7 @@ function runFoursquare (){
 
         var myIcon = L.divIcon({
           className: 'place',
-          html:"<a href='" + placeURL + "' target='_blank' class='placeA'>" + name + "<img src='"+ icon +"' width='20px' height='20px' /></a>",
+          html:"<a href='" + placeURL + "' target='_blank' class='placeA'><p>" + name + "</p><img src='"+ icon +"' width='20px' height='20px' /></a>",
         });
         
         L.marker(new L.LatLng(llat, llng), {icon: myIcon}).addTo(map);
