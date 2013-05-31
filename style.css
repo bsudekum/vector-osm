@@ -14,6 +14,11 @@ path { stroke-linejoin; round; stroke-linecap: round; fill: none}
 path.river { stroke : #24b; }
 path.water { stroke: #B1D1F5; fill: #B1D1F5; }
 
+path.rail {
+	stroke-dasharray:5,5;
+	stroke:grey;
+}
+
 path.place_of_worship,
 path.fuel,
 path.library,
@@ -73,6 +78,7 @@ path.park {
 	stroke:none;
 	opacity:.2;
 }
+
 
 /*4sq*/
 .place {

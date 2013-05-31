@@ -37,13 +37,6 @@ L.TileLayer.d3_geoJSON =  L.TileLayer.extend({
                     .attr("d", self._path)
                     .attr("class", self.options.class)
                     .attr("style", self.options.style)
-                    .attr("id", self.options.id)
-                .append('text')
-                .append("svg:textpath")
-                    .attr("xlink:href", function(d) { return d.geometry.coordinates[0]})
-                    .text('hello')
-                    .attr('x',10)
-                    .attr('y',10)
             });
         }
     }
