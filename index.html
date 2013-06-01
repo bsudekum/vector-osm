@@ -37,10 +37,11 @@
   };
 
   //To Do, add labels
-  // new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-skeletron/{z}/{x}/{y}.json', {
-  //   text:'hello',
-  //   href: function(d) { return '#' + d.geometry.coordinates[0]}
-  // }).addTo(map)
+var label = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-skeletron/{z}/{x}/{y}.json', {
+    id: function(d) {return d.geometry.coordinates[1]},
+    id2: function(d) {return "#"+d.geometry.coordinates[1]},
+    text: function(d) {return d.properties.name},
+  })
 
   var land = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-land-usages/{z}/{x}/{y}.json', {
     class: function(d) {return 'landuse ' + d.properties.kind; console.log(d.properties.kind)},
@@ -67,7 +68,8 @@
     center: [37.7837,-122.4166],
     zoom: 16,
     minZoom:14,
-    layers: [land, water, building, road, dummy]
+    // layers: [dummy,label]
+    layers: [land, water, building, road, dummy,label]
   }).addControl(L.mapbox.geocoderControl('bobbysud.map-15wycltk'));
 
   L_PREFER_CANVAS = true;
@@ -80,13 +82,14 @@
     'Land': land,
     'Water': water,
     'Buildings': building,
-    'Roads': road
+    'Roads': road,
+    'label': label
   };
 
   L.control.layers(baseLayers, overlays).addTo(map);
 
-  map.on('moveend',runFoursquare)
-  runFoursquare();
+  // map.on('moveend',runFoursquare)
+  // runFoursquare();
 
 </script>
 </body>

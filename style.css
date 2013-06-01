@@ -19,6 +19,14 @@ path.rail {
 	stroke:grey;
 }
 
+.text{
+	font-size: 10px;
+}
+path.label {
+	stroke-dasharray:5,5;
+	stroke:grey;
+}
+
 path.place_of_worship,
 path.fuel,
 path.library,

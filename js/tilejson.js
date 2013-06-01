@@ -33,10 +33,21 @@ L.TileLayer.d3_geoJSON =  L.TileLayer.extend({
                 tile.nodes = d3.select(map._container).select("svg").append("g");
                 tile.nodes.selectAll("path")
                     .data(geoJson.features).enter()
+                .append("text")
+                .append('textPath')
+                    .attr("xlink:href", self.options.id2)
+                    .attr('class','text')
+                    .text(self.options.text);
+                tile.nodes.selectAll("path")
+                    .data(geoJson.features).enter()
                 .append("path")
                     .attr("d", self._path)
                     .attr("class", self.options.class)
                     .attr("style", self.options.style)
+                    .attr("viewBox",'0,0,100,100')
+                    .attr("id", self.options.id)
+                    
+                
             });
         }
     }
