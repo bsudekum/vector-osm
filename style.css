@@ -9,6 +9,7 @@ path.landuse {
 	fill:#A1CA9F;
 	opacity:.3;
 }
+
  
 path { stroke-linejoin; round; stroke-linecap: round; fill: none}
 path.river { stroke : #24b; }
@@ -20,8 +21,31 @@ path.rail {
 }
 
 .text{
+	fill-opacity:.5;
+	dominant-baseline: middle;
+}
+
+.primary{
+	font-size: 12px;
+}
+
+.motorway{
+	font-size: 12px;
+	
+}
+.text3{
 	font-size: 10px;
 }
+.text4{
+	font-size: 9px;
+}
+.text5{
+	font-size: 8px;
+}
+.text6{
+	font-size: 7px;
+}
+
 path.label {
 	stroke-dasharray:5,5;
 	stroke:grey;
@@ -110,4 +134,7 @@ path.park {
 .place img {
   background: rgba(185, 0, 0, 0.41);
   border-radius: 16px;
+}
+.text.residential{
+	font-size: 11px;
 }

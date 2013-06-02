@@ -36,7 +36,9 @@ L.TileLayer.d3_geoJSON =  L.TileLayer.extend({
                 .append("text")
                 .append('textPath')
                     .attr("xlink:href", self.options.id2)
-                    .attr('class','text')
+                    .attr("class", self.options.class)
+                    .attr("console", self.options.console)
+                    .attr('startOffset',"50%")
                     .text(self.options.text);
                 tile.nodes.selectAll("path")
                     .data(geoJson.features).enter()
@@ -44,10 +46,7 @@ L.TileLayer.d3_geoJSON =  L.TileLayer.extend({
                     .attr("d", self._path)
                     .attr("class", self.options.class)
                     .attr("style", self.options.style)
-                    .attr("viewBox",'0,0,100,100')
-                    .attr("id", self.options.id)
-                    
-                
+                    .attr("id", self.options.id);
             });
         }
     }

@@ -36,16 +36,21 @@
     'path': 'white'
   };
 
-  //To Do, add labels
-var label = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-skeletron/{z}/{x}/{y}.json', {
-    id: function(d) {return d.geometry.coordinates[1]},
-    id2: function(d) {return "#"+d.geometry.coordinates[1]},
-    text: function(d) {return d.properties.name},
+  var label = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-skeletron/{z}/{x}/{y}.json', {
+    id: function(d) {return d.geometry.coordinates[0]+d.geometry.coordinates[1]},
+    id2: function(d) {return "#"+d.geometry.coordinates[0]+d.geometry.coordinates[1]},
+    class: function(d) {return "text-"+d.properties.highway; console.log(d.properties.highway)},
+    class: function(d) {return "text text-"+d.properties.highway; console.log(d.properties.highway)},
+    text: function(d) {return d.properties.name },
   })
 
   var land = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-land-usages/{z}/{x}/{y}.json', {
     class: function(d) {return 'landuse ' + d.properties.kind; console.log(d.properties.kind)},
-    style: function(d) {return}
+    style: function(d) {return},
+    // id: function(d) {return d.geometry.coordinates[0]},
+    // id2: function(d) {return "#"+d.geometry.coordinates[0]},
+    // text: function(d) {return d.properties.name },
+    // console: function(d) {console.log(d.properties.name)}
   });
 
   var building = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-buildings/{z}/{x}/{y}.json', {
@@ -68,11 +73,9 @@ var label = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-sk
     center: [37.7837,-122.4166],
     zoom: 16,
     minZoom:14,
-    // layers: [dummy,label]
+    // layers: [dummy,label,road]
     layers: [land, water, building, road, dummy,label]
   }).addControl(L.mapbox.geocoderControl('bobbysud.map-15wycltk'));
-
-  L_PREFER_CANVAS = true;
   
   var hash = new L.Hash(map);
 
