@@ -4,15 +4,14 @@
   <meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0'/>
   <title>Vector OSM</title>
   <link href='style.css' rel='stylesheet' />
-  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.js'></script>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.css' rel='stylesheet' />
+   <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.css' rel='stylesheet' />
   <!--[if lte IE 8]>
-    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.ie.css' rel='stylesheet' >
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.ie.css' rel='stylesheet' />
   <![endif]-->
-  <script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.js'></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
   <script src='js/tilejson.js'></script>
-  <script src='http://code.jquery.com/jquery-1.8.2.min.js'></script>
-  <script src='js/foursquare.js'></script>
   <script src='js/leaflet-hash.js'></script>
 </head>
 
@@ -20,79 +19,16 @@
 <div id='map'></div>
 <script type='text/javascript'>
 
-  var roadSizes = {
-    'highway': '7px',
-    'major_road': '3px',
-    'minor_road': '1px',
-    'rail': '1px',
-    'path': '0.5px'
-  };
-
-  var roadColor = {
-    'highway': '#F78545',
-    'major_road': '#FFCD2F',
-    'minor_road': '#707070',
-    'rail': '#B3B3B3',
-    'path': 'white'
-  };
-
-  var label = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-skeletron/{z}/{x}/{y}.json', {
-    id: function(d) {return d.geometry.coordinates[0]+d.geometry.coordinates[1]},
-    id2: function(d) {return "#"+d.geometry.coordinates[0]+d.geometry.coordinates[1]},
-    class: function(d) {return "text-"+d.properties.highway; console.log(d.properties.highway)},
-    class: function(d) {return "text text-"+d.properties.highway; console.log(d.properties.highway)},
-    text: function(d) {return d.properties.name },
-  })
-
-  var land = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-land-usages/{z}/{x}/{y}.json', {
-    class: function(d) {return 'landuse ' + d.properties.kind; console.log(d.properties.kind)},
-    style: function(d) {return},
-    // id: function(d) {return d.geometry.coordinates[0]},
-    // id2: function(d) {return "#"+d.geometry.coordinates[0]},
-    // text: function(d) {return d.properties.name },
-    // console: function(d) {console.log(d.properties.name)}
-  });
-
-  var building = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-buildings/{z}/{x}/{y}.json', {
-    class: 'building'
-  });
-
-  var road = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-highroad/{z}/{x}/{y}.json', {
-    class: function(d) { return d.properties.kind},
-    style: function(d) { return 'stroke-width: ' + roadSizes[d.properties.kind] +'; stroke: ' + roadColor[d.properties.kind]},
-  });
-
-  var water = new L.TileLayer.d3_geoJSON('http://tile.openstreetmap.us/vectiles-water-areas/{z}/{x}/{y}.json', {
-    class: 'water'
-  });
-
-  // Add a fake GeoJSON line to coerce Leaflet into creating the <svg> tag that d3_geoJson needs
-  var dummy = new L.geoJson({'type': 'LineString','coordinates':[[0,0],[0,0]]})
-
   var map = L.map('map', {
     center: [37.7837,-122.4166],
     zoom: 16,
-    minZoom:14,
-    // layers: [dummy,label,road]
-    layers: [land, water, building, road, dummy,label]
   }).addControl(L.mapbox.geocoderControl('bobbysud.map-15wycltk'));
   
-  var hash = new L.Hash(map);
+  new L.Hash(map);
 
-  var baseLayers = {};
+  new L.geoJson({'type': 'LineString','coordinates':[[0,0],[0,0]]}).addTo(map);
 
-  var overlays = {
-    'Land': land,
-    'Water': water,
-    'Buildings': building,
-    'Roads': road,
-    'label': label
-  };
-
-  L.control.layers(baseLayers, overlays).addTo(map);
-
-  // map.on('moveend',runFoursquare)
-  // runFoursquare();
+  new L.TileLayer.d3_topoJSON("http://tile.openstreetmap.us/vectiles-all/{z}/{x}/{y}.topojson").addTo(map);
 
 </script>
 </body>

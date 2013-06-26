@@ -5,13 +5,12 @@ body,
 	margin:0;
 }
 
-path.landuse {
-	fill:#A1CA9F;
-	opacity:.3;
+path.landuse,
+path.building {
+	stroke:none;
 }
-
  
-path { stroke-linejoin; round; stroke-linecap: round; fill: none}
+path { stroke-linejoin; round; stroke-linecap: butt; fill: none}
 path.river { stroke : #24b; }
 path.water { stroke: #B1D1F5; fill: #B1D1F5; }
 
@@ -20,30 +19,25 @@ path.rail {
 	stroke:grey;
 }
 
+.highway{
+	stroke:#F78545;
+	stroke-width:8px;
+}
+.major_road{
+	stroke:#FFCD2F;
+	stroke-width:5px;
+}
+.minor_road{
+	stroke:#707070;
+	stroke-width:3px;
+}
+.path{
+	stroke:white;
+}
+
 .text{
 	fill-opacity:.5;
 	dominant-baseline: middle;
-}
-
-.primary{
-	font-size: 12px;
-}
-
-.motorway{
-	font-size: 12px;
-	
-}
-.text3{
-	font-size: 10px;
-}
-.text4{
-	font-size: 9px;
-}
-.text5{
-	font-size: 8px;
-}
-.text6{
-	font-size: 7px;
 }
 
 path.label {
@@ -51,66 +45,55 @@ path.label {
 	stroke:grey;
 }
 
-path.place_of_worship,
-path.fuel,
-path.library,
-path.building {
-	fill:#A7A7A7;
+/*Polygon features*/
+.place_of_worship,
+.fuel,
+.library,
+.building {
+  fill:#A7A7A7;
 }
-
-path.industrial,
-path.residential,
-path.retail,
-path.commercial{
-	fill:#FFF;
-	opacity:.3;
+.industrial,
+.residential,
+.retail,
+.commercial{
+  fill:#FFF;
+  opacity:.3;
 }
-
-path.golf_course{
-	fill:#84C765
+.golf_course{
+  fill:#84C765
 }
-
-path.hospital{
-	fill:#FFA0A0;
+.hospital{
+  fill:#FFA0A0;
 }
-path.school,
-path.university{
-	fill:#F1D6BC;
+.school,
+.university{
+  fill:#F1D6BC;
 }
-
-path.parking{
-	fill:#cfcfcf;
+.parking{
+  fill:#cfcfcf;
 }
-path.pitch,
-path.farm,
-path.garden{
-	fill:#DBCEBE;
+.pitch,
+.farm,
+.garden{
+  fill:#DBCEBE;
 }
-
-path.railway{
-	fill:none;
-	stroke:none;
+.forest,
+.quarry,
+.wood,
+.scrub{
+  fill:#8CA782;
 }
-
-path.forest,
-path.quarry,
-path.wood,
-path.scrub{
-	fill:#8CA782;
+.sports_centre,
+.playground,
+.pedestrian,
+.village_green,
+.common,
+.grass,
+.park {
+  fill:#A1CA9F;
+  stroke:none;
+  opacity:.2;
 }
-
-path.sports_centre,
-path.playground,
-path.pedestrian,
-path.village_green,
-path.common,
-path.grass,
-path.park {
-	fill:#A1CA9F;
-	stroke:none;
-	opacity:.2;
-}
-
 
 /*4sq*/
 .place {
@@ -137,4 +120,8 @@ path.park {
 }
 .text.residential{
 	font-size: 11px;
+}
+
+.nodraw{
+	opacity:.05;
 }
