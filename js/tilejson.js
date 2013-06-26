@@ -54,14 +54,7 @@ L.TileLayer.d3_topoJSON =  L.TileLayer.extend({
                     //         .attr('class',function(d){
                     //             console.log(d.properties.kind)
                     //         })
-
-                    .data(road.features).enter()
-                        .append('path')
-                            .attr('d', self._path)
-                            .attr('class',function(d){
-                                return d.properties.kind
-                            })
-
+    
                     .data(landUsages.features).enter()
                         .append('path')
                             .attr('d', self._path)
@@ -73,6 +66,13 @@ L.TileLayer.d3_topoJSON =  L.TileLayer.extend({
                                 }   
                             })
 
+                    .data(road.features).enter()
+                        .append('path')
+                            .attr('d', self._path)
+                            .attr('class',function(d){
+                                return d.properties.kind
+                            })
+                    
                     .data(buildings.features).enter()
                         .append('path')
                             .attr('d', self._path)
