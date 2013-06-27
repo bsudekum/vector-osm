@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0'/>
+  <title>Vector OSM</title>
+  <link href='style.css' rel='stylesheet' />
+   <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.css' rel='stylesheet' />
+  <!--[if lte IE 8]>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.ie.css' rel='stylesheet' />
+  <![endif]-->
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.4/mapbox.js'></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src='js/tilejson.js'></script>
+  <script src='js/leaflet-hash.js'></script>
+</head>
+
+<body>
+<div id='map'></div>
+<script type='text/javascript'>
+
+  var map = L.map('map', {
+    center: [37.7837,-122.4166],
+    zoom: 16,
+  }).addControl(L.mapbox.geocoderControl('bobbysud.map-15wycltk'));
+  
+  new L.Hash(map);
+
+  new L.geoJson({'type': 'LineString','coordinates':[[0,0],[0,0]]}).addTo(map);
+
+  new L.TileLayer.d3_topoJSON("http://tile.openstreetmap.us/vectiles-highroad/{z}/{x}/{y}.topojson",{
+    layerName: "vectile",
+    class: function(d){
+      return d.properties.kind
+    }
+  }).addTo(map);
+
+  new L.TileLayer.d3_topoJSON("http://tile.openstreetmap.us/vectiles-water-areas/{z}/{x}/{y}.topojson",{
+    layerName: "vectile",
+    class:'water'
+  }).addTo(map);
+
+  new L.TileLayer.d3_topoJSON("http://tile.openstreetmap.us/vectiles-land-usages/{z}/{x}/{y}.topojson",{
+    layerName: "vectile",
+    class: function(d){
+      return d.properties.kind +' landuse'
+    }
+  }).addTo(map);
+
+  new L.TileLayer.d3_topoJSON("http://tile.openstreetmap.us/vectiles-buildings/{z}/{x}/{y}.topojson",{
+    layerName: 'vectile',
+    class: 'building'
+  }).addTo(map);
+
+</script>
+</body>
+</html>

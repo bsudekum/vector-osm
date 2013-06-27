@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0'/>
+  <title>Vector OSM</title>
+  <link href='style.css' rel='stylesheet' />
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.css' rel='stylesheet' />
+  <!--[if lte IE 8]>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.2/mapbox.ie.css' rel='stylesheet' >
+  <![endif]-->
+  <script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
+  <script src='js/tilejson.js'></script>
+  <script src='http://code.jquery.com/jquery-1.8.2.min.js'></script>
+  <script src='js/foursquare.js'></script>
+  <script src='js/leaflet-hash.js'></script>
+</head>
+
+<body>
+<div id='testdiv'></div>
+<script type='text/javascript'>
+var cfg = {
+    w:400,
+    h:400
+};
+
+var g = d3.select("#testdiv").append("svg").attr("width", cfg.w).attr("height", cfg.h).append("g")
+
+var arct = d3.svg.arc()
+        .innerRadius(cfg.h / 5)
+        .outerRadius(cfg.h / 3)
+        .startAngle(Math.PI/2)
+        .endAngle(Math.PI*1.5);
+
+var path = g.append("svg:path")
+    .attr("id","zzz")
+    .attr("d", arct)
+    .style("fill","blue")
+    .attr("transform", "translate("+cfg.w/2+","+cfg.h/6+")");
+
+// Radius of line text sits on. A value of 3.5 makes it slightly closer to the
+// outer radius (so text is placed in the middle of the blue line).
+var textpathRadius = (cfg.h / 3.5);
+
+var text = g.append("text")
+            .append("textPath")
+            .attr("xlink:href","#zzz")
+            .text("some text");
+
+
+</script>
+</body>
+</html>
+  
