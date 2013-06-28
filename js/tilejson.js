@@ -26,27 +26,27 @@ L.TileLayer.d3_topoJSON =  L.TileLayer.extend({
    _loadTile : function(tile,tilePoint) {
         var self = this;
         this._adjustTilePoint(tilePoint);
-
+ 
         if (!tile.nodes && !tile.xhr) {
             tile.xhr = d3.json(this.getTileUrl(tilePoint),function(error, tjData) {
-
+ 
                 var pois = topojson.feature(tjData, tjData.objects.pois);
                 var landUsages = topojson.feature(tjData, tjData.objects['land-usages']);
                 var buildings = topojson.feature(tjData, tjData.objects.buildings);
                 var road = topojson.feature(tjData, tjData.objects.highroad);
                 var water = topojson.feature(tjData, tjData.objects['water-areas']);
-                
+                 
                 tile.nodes = d3.select(map._container).select('svg').append('g');
                 tile.nodes.selectAll('path')
-
+ 
                     .data(water.features).enter()
                         .append('path')
                             .attr('d', self._path)
                             .attr('class','water')
-
-                    //** 
-                    //POIS are not cool right now
-                    //**
+ 
+                    // ** 
+                    // POIS are not cool right now
+                    // **
                     // .data(pois.features).enter()
                     //     .append('path')
                     //         .attr('d', self._path)
@@ -54,7 +54,7 @@ L.TileLayer.d3_topoJSON =  L.TileLayer.extend({
                     //         .attr('class',function(d){
                     //             console.log(d.properties.kind)
                     //         })
-    
+     
                     .data(landUsages.features).enter()
                         .append('path')
                             .attr('d', self._path)
@@ -65,23 +65,21 @@ L.TileLayer.d3_topoJSON =  L.TileLayer.extend({
                                     return d.properties.kind +' landuse nodraw'     
                                 }   
                             })
-
+ 
                     .data(road.features).enter()
                         .append('path')
                             .attr('d', self._path)
                             .attr('class',function(d){
                                 return d.properties.kind
                             })
-                    
+                     
                     .data(buildings.features).enter()
                         .append('path')
                             .attr('d', self._path)
                             .attr('class','building')
-                    
-                    
+                     
+                     
             });
         }
     }
 });
-
-

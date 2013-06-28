@@ -28,7 +28,20 @@
 
   new L.geoJson({'type': 'LineString','coordinates':[[0,0],[0,0]]}).addTo(map);
 
-  new L.TileLayer.d3_topoJSON("http://tile.openstreetmap.us/vectiles-all/{z}/{x}/{y}.topojson").addTo(map);
+  new L.TileLayer.d3_topoJSON("http://tile.openstreetmap.us/vectiles-all/{z}/{x}/{y}.topojson",{
+    updateWhenIdle:false
+  }).addTo(map);
+
+  // var TestCanvas = L.TileLayer.Canvas.extend({
+  //     options: {
+  //     },
+  //     drawTile: function(canvas) {
+  //         var ctx = canvas.getContext('2d');
+  //         ctx.fillStyle = "rgba(0,255,0,1)";
+  //     }
+  // });
+
+  // (new TestCanvas()).addTo(map);
 
 </script>
 </body>
