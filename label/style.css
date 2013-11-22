@@ -1,0 +1,127 @@
+html,
+body,
+#map {
+	height: 100%;
+	margin:0;
+}
+
+path.landuse,
+path.building {
+	stroke:none;
+}
+ 
+path { stroke-linejoin; round; stroke-linecap: butt; fill: none}
+path.river { stroke : #24b; }
+path.water { stroke: #B1D1F5; fill: #B1D1F5; }
+
+path.rail {
+	stroke-dasharray:5,5;
+	stroke:grey;
+}
+
+.highway{
+	stroke:#F78545;
+	stroke-width:8px;
+}
+.major_road{
+	stroke:#FFCD2F;
+	stroke-width:5px;
+}
+.minor_road{
+	stroke:#707070;
+	stroke-width:3px;
+}
+.path{
+	stroke:white;
+}
+
+.text{
+	fill-opacity:.5;
+	dominant-baseline: middle;
+}
+
+path.label {
+	stroke-dasharray:5,5;
+	stroke:grey;
+}
+
+/*Polygon features*/
+.place_of_worship,
+.fuel,
+.library,
+.building {
+  fill:#A7A7A7;
+}
+.industrial,
+.residential,
+.retail,
+.commercial{
+  fill:#FFF;
+  opacity:.3;
+}
+.golf_course{
+  fill:#84C765
+}
+.hospital{
+  fill:#FFA0A0;
+}
+.school,
+.university{
+  fill:#F1D6BC;
+}
+.parking{
+  fill:#cfcfcf;
+}
+.pitch,
+.farm,
+.garden{
+  fill:#DBCEBE;
+}
+.forest,
+.quarry,
+.wood,
+.scrub{
+  fill:#8CA782;
+}
+.sports_centre,
+.playground,
+.pedestrian,
+.village_green,
+.common,
+.grass,
+.park {
+  fill:#A1CA9F;
+  stroke:none;
+  opacity:.2;
+}
+
+/*4sq*/
+.place {
+  width: 68px!important;
+}
+.placeA {
+  text-align: center;
+  font-size: 9.5px;  
+  color: #474747!important;
+  cursor:pointer;
+  text-decoration:none;
+  position: relative;
+  bottom: 60px;
+}
+.place p{
+	right: 24px;
+	top: 46px;
+	position: relative;
+	line-height: 28px;
+}
+.place img {
+  background: rgba(185, 0, 0, 0.41);
+  border-radius: 16px;
+}
+.text.residential{
+	font-size: 11px;
+}
+
+.nodraw{
+	opacity:.05;
+}
